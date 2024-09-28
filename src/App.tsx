@@ -1,16 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Fragment, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { useSelector } from "react-redux";
+import { RootState } from "./redux/store";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import Header from "./Header";
+import Signin from "./Signin";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      
+      <Router>
+        <Fragment>
+          <Routes>
+            <Route path="/" element={<Home></Home>}></Route>
+            <Route path="/signin" element={<Signin></Signin>}></Route>
+          </Routes>
+        </Fragment>
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

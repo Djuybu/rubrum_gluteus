@@ -1,20 +1,22 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createAction, createReducer } from "@reduxjs/toolkit";
 import { User } from "../type/user.type";
 
 
 interface userState{
-    user: User
+    user: User[]
 }
 
 const initialState: userState = {
-    user: {
-        username: "",
-        email: "",
-        phone_number: "",
-        age: ""
-    },
+    user: []
 }
 
-const userReducer = createReducer(initialState, builder => {})
+export const addUser = createAction<User>('user/addUser');
 
-export default userReducer;
+const userReducer = createReducer(initialState, builder => {
+    builder.addCase(addUser, (state, action) => {
+        const user = action.payload;
+        state.user.push(user);
+    })
+})
+
+export default userReducer; 
