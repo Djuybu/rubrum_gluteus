@@ -1,5 +1,5 @@
-import { RootState } from "@reduxjs/toolkit/query"
 import { useSelector } from "react-redux"
+import { RootState } from "./redux/store";
 
 const Header = () => {
     const user = useSelector((state: RootState)=>state.user.user[0])
