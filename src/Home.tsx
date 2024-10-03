@@ -32,7 +32,8 @@ const Home = () => {
             <li>Abc</li>
           </ul>
         </div>
-
+        {/* <Post>
+        </Post> */}
         <div className="content">
           <div className="post">
             <div className="icon red"></div>

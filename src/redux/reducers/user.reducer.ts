@@ -1,5 +1,5 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
-import { User } from "../type/user.type";
+import { User } from "../../type/user.type";
 
 
 interface userState{
