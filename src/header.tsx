@@ -13,7 +13,7 @@ const Header = () => {
                 <input type="text" placeholder="Search..."></input>
             </div>
             <div className="username">
-                <img className="icon" src={user.avatar} alt="" />
+                <img className="icon" src={user.avatar} alt="" /> 
                 <span>{user.username}</span>
             </div>
             </header>
