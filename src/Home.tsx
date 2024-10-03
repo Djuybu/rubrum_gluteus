@@ -1,17 +1,19 @@
 import { useSelector } from "react-redux";
-import Header from "./Header";
 import { RootState } from "./redux/store";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Header from "./header";
 
 const Home = () => {
   const user = useSelector((state: RootState) => state.user.user[0]);
   const navigate = useNavigate()
   useEffect(() => {
-    if (user === undefined) {
+    console.log("tbm da o day");
+    
+    if (user.id === -1) {
       navigate("/signin")
     }
-  }, [])
+  }, [user])
   return (
     <>
     <Header></Header>

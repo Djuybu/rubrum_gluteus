@@ -55,6 +55,7 @@ const server = http.createServer((req, res) => {
       res.end(
         JSON.stringify({
           user: {
+            id: 69,
             username: "admin",
             email: "admin@example.com",
             age: 30,

@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
-import Header from "./Header";
 import Signin from "./Signin";
 
 function App() {
