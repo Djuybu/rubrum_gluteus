@@ -1,7 +1,10 @@
 export interface Post {
+    id: string,
     subreddit: string,
     user: string,
-    body: string,
-    upvotes: string,
-    downvotes: string
+    content: string,
+    title: string,
+    upvotes: number,
+    downvotes: number,
+    avatarPath: string,
 }

@@ -1,19 +1,49 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Header from "./header";
+import { PostExample } from "./post_example";
+import Posts from "./props/Posts";
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import { addPosts } from "./redux/reducers/post.reducer";
+import { Post } from "./type/post.type";
+import PostProp from "./props/Posts";
 
 const Home = () => {
-  const user = useSelector((state: RootState) => state.user.user[0]);
-  const navigate = useNavigate()
-  useEffect(() => {
-    console.log("tbm da o day");
+  function addPostsToRedux() {
+      // wait API from BE
+    // axios.get("http://localhost:5000/posts", {
+    //   headers: {
+    //     "Authorization": `Bearer ${cookie.Jwt}`
+    //   }
+    // }).then((response) => {
+    //   dispatch(addPosts(response.data));
+    // })
+    console.log("Here");
     
-    if (user.id === -1) {
+    dispatch(addPosts(PostExample))
+    console.log(posts);
+  }
+  const user = useSelector((state: RootState) => state.user.user[0]);
+  let posts: Post[] = useSelector((state: RootState) => state.posts.post)
+  useEffect(() => {
+    
+    if (user.id === undefined) {
       navigate("/signin")
+      return;
+    }
+
+    if (posts.length === 0 && user.id !== undefined) {
+      addPostsToRedux();
     }
   }, [user])
+  // add post when user load for the first time 
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [cookie] = useCookies(['Jwt'])
   return (
     <>
     <Header></Header>
@@ -34,47 +64,15 @@ const Home = () => {
             <li>Abc</li>
           </ul>
         </div>
-        {/* <Post>
-        </Post> */}
         <div className="content">
-          <div className="post">
-            <div className="icon red"></div>
-            <div className="details">
-              <p className="title">r/abc</p>
-              <p>This is a title</p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur. Interdum elementum odio
-                non lectus neque eu. Iaculis tincidunt ut nulla nibh nam id
-                tortor. Sagittis hendrerit eu quis commodo sed rhoncus.
-              </p>
-              <div className="comments">
-                <span>⬆ 146</span>
-                <span>⬇</span>
-                <span>💬 Comments</span>
-                <span>🔗 Share</span>
-              </div>
-            </div>
-          </div>
-          <div className="post">
-            <div className="icon blue"></div>
-            <div className="details">
-              <p className="title">r/def</p>
-              <p>This is a title</p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur. Interdum elementum odio
-                non lectus neque eu. Iaculis tincidunt ut nulla nibh nam id
-                tortor. Sagittis hendrerit eu quis commodo sed rhoncus.
-              </p>
-              <div className="comments">
-                <span>⬆ 146</span>
-                <span>⬇</span>
-                <span>💬 Comments</span>
-                <span>🔗 Share</span>
-              </div>
-            </div>
-          </div>
+          {posts.map((post) => {
+            return(
+              <>
+                <PostProp post={post} />
+              </>
+            )
+          })}
         </div>
-
         <div className="popular">
           <h3>Popular</h3>
           <ul>

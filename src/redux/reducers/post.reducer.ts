@@ -10,13 +10,15 @@ const initialState: postState = {
     post: []
 }
 
-export const addUser = createAction<Post>('post/addPost');
+export const addPosts = createAction<Post[]>('post/addPosts');
 
-const userReducer = createReducer(initialState, builder => {
-    builder.addCase(addUser, (state, action) => {
-        const post = action.payload;
-        state.post.push(post);
+const postsReducer = createReducer(initialState, builder => {
+    builder.addCase(addPosts, (state, action) => {
+        const posts = action.payload;
+        posts.map((post) => {
+            state.post.push(post);
+        })
     })
 })
 
-export default userReducer; 
+export default postsReducer; 

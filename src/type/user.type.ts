@@ -1,8 +1,6 @@
 export interface User{
-    id: number,
-    username: string,
+    username: string| undefined,
+    id: string |undefined,
     email: string,
-    phone_number: string,
-    age: string,
-    avatar: string
+    avatarPath: string
 }

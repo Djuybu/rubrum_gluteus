@@ -9,12 +9,10 @@ interface userState{
 const initialState: userState = {
     user: [
         {
-            id: -1,
+            id: undefined,
             username: "",
             email: "",
-            phone_number: "",
-            age: "",
-            avatar: ""
+            avatarPath: ""
         }
     ]
 }
@@ -23,6 +21,7 @@ export const addUser = createAction<User>('user/addUser');
 
 const userReducer = createReducer(initialState, builder => {
     builder.addCase(addUser, (state, action) => {
+        console.log(action.payload);
         const user = action.payload;
         state.user[0] = user;
     })

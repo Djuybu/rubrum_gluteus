@@ -8,8 +8,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Signin from "./Signin";
 import Profile from "./Profile";
+import { useCookies } from "react-cookie";
 
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies(['Authorization'], {
+    doNotParse: true
+  })
   return (
     <>
       <Router>
