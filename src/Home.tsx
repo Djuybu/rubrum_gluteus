@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Header from "./header";
 import { PostExample } from "./post_example";
-import Posts from "./props/Posts";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { addPosts } from "./redux/reducers/post.reducer";
@@ -90,6 +89,11 @@ const Home = () => {
             </li>
             <li>
               <a href="#">See more</a>
+            </li>
+            <li>
+              <button onClick={() => {
+                navigate("thread/create")
+              }}></button>
             </li>
           </ul>
         </div>

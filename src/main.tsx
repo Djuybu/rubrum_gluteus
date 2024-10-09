@@ -8,7 +8,7 @@ import { CookiesProvider } from "react-cookie";
 
 createRoot(document.getElementById("root")!).render(
   <CookiesProvider>
-    <Provider store={store}>
+    <Provider store={store}>  
         <App />
     </Provider>
   </CookiesProvider>
