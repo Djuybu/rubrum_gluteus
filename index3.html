@@ -72,9 +72,10 @@
             margin-right: 10px;
         }
         .popular {
-            flex: 25%;
+            flex: 10%;
             height: fit-content;
             margin-top: 20px;
+            margin-right: 20px;
             padding: 10px;
             padding-bottom:20px;
             background-color: #f8f8f8;
@@ -230,6 +231,55 @@
             background-color: transparent;
             cursor: pointer;
         }
+        .settings {
+            width: 300px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .settings h2 {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        .settings-item img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .settings-item .text {
+            flex-grow: 1;
+        }
+        .settings-item .text p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .settings-item .text p.title {
+            font-weight: bold;
+            color: #333;
+        }
+        .settings-item button {
+            background-color: #e6f0ff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: #0079d3;
+        }
+        .settings-item button:hover {
+            background-color: #cce0ff;
+        }
     </style>
 </head>
 <body>
@@ -307,18 +357,36 @@
         </div>
 
         <div class="popular">
-            <h3>Popular</h3>
-            <div class="popular-item">
-                <span class="circle red"></span> r/abc
-            </div>
-            <div class="popular-item">
-                <span class="circle blue"></span> r/def
-            </div>
-            <div class="popular-item">
-                <span class="circle green"></span> r/ghi
-            </div>
-            <div class="popular-item">
-                <span class="circle yellow"></span> r/jkl
+            <div class="settings">
+                <h2>SETTINGS</h2>
+                
+                <div class="settings-item">
+                    <img src="https://via.placeholder.com/30" alt="Profile Icon">
+                    <div class="text">
+                        <p class="title">Profile</p>
+                        <p>Customize your profile</p>
+                    </div>
+                    <button>Edit Profile</button>
+                </div>
+                
+                <div class="settings-item">
+                    <img src="https://via.placeholder.com/30" alt="Avatar Icon">
+                    <div class="text">
+                        <p class="title">Avatar</p>
+                        <p>Customize and style</p>
+                    </div>
+                    <button>Style Avatar</button>
+                </div>
+                
+                <div class="settings-item">
+                    <img src="https://via.placeholder.com/30" alt="Moderation Icon">
+                    <div class="text">
+                        <p class="title">Moderation</p>
+                        <p>Moderation Tools</p>
+                    </div>
+                    <button>Mod Settings</button>
+                </div>
+            
             </div>
         </div>
     </div>
