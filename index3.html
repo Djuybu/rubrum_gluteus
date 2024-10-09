@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit-like Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            width: 100%;
+            height: 5vh;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ccc;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .search-bar {
+            width: 300px;
+            padding: 5px;
+        }
+        .loginbtn {
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+            font-size: 25px;
+            margin-right: 100px;
+            padding: 10px 40px 0px 40px;
+            background-color: #E00000;
+            color: white;
+            font-style: bold;
+        }
+        .container {
+            display: flex;
+            margin-top: 60px; /* To account for fixed header height */
+        }
+        .sidebar {
+            flex: 15%;
+            min-height: 95vh;
+            height: fit-content;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .content {
+            flex: 60%;
+            padding: 20px;
+        }
+        .post {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+        .post-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .post-content {
+            font-size: 14px;
+            color: #555;
+        }
+        .vote-buttons, .comments, .share {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .popular {
+            flex: 25%;
+            height: fit-content;
+            margin-top: 20px;
+            padding: 10px;
+            padding-bottom:20px;
+            background-color: #f8f8f8;
+        }
+        .popular-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .circle {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            z-index: 101;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Darken the background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+        }
+
+        .modal {
+            background-color: white;
+            width: 30vh;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form elements */
+        .modal h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .modal-inputs {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .login-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background-color: #cc0000;
+        }
+
+        /* Links */
+        .forgot-password,
+        .sign-up,
+        .switch-login {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .forgot-password a,
+        .sign-up a,
+        .switch-login a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover,
+        .sign-up a:hover,
+        .switch-login a:hover {
+            text-decoration: underline;
+        }
+        /* Social login */
+        .social-login {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-login img {
+            width: 30px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        /* Show the modal when the class 'active' is added */
+        .modal-overlay.active {
+            visibility: visible;
+        }
+        .red { background-color: red; }
+        .blue { background-color: blue; }
+        .green { background-color: green; }
+        .yellow { background-color: yellow; }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .profile-header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+        .username {
+            margin-left: 10px;
+        }
+        .tabs {
+            margin: 20px 0;
+        }
+        .tabs button {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        .tabs button.active {
+            background-color: #ccc;
+        }
+        .profile-content {
+            margin: 20px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        .profile-content .title {
+            font-size: 1.5em;
+            color: #0079d3;
+            margin-bottom: 10px;
+        }
+        .profile-content p {
+            margin: 10px 0;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .actions button {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <h2>Login</h2>
+            <input class="modal-inputs" type="text" placeholder="Email or username">
+            <input class="modal-inputs" type="password" placeholder="Password">
+            <a href="#" class="forgot-password">Forgot password?</a>
+            <a href="#" class="sign-up" onclick="switchToSignup()">New to site? Sign up</a>
+            <button class="login-btn">Login</button>
+
+            <div class="social-login">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Windows_logo_-_2021.svg" alt="Microsoft">
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal-overlay" id="signupModal">
+        <div class="modal">
+            <h2>Sign Up</h2>
+            <input class="modal-inputs" type="text" placeholder="Email">
+            <input class="modal-inputs" type="text" placeholder="Username">
+            <input class="modal-inputs" type="password" placeholder="Password">
+            <a href="#" class="switch-login" onclick="switchToLogin()">Already have an account? Login</a>
+            <button class="login-btn">Sign Up</button>
+        </div>
+    </div>
+
+    <div class="header">
+        <div style = "font-size:40px;">LOGO</div>
+        <input type="text" class="search-bar" placeholder="Search...">
+        <div class="loginbtn" onclick="openLoginModal()">Login</div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Categories</h2>
+            <ul>
+                <li>Abc</li>
+                <li>Abc</li>
+                <li>Abc</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="profile-header">
+                <img src="https://via.placeholder.com/50" alt="User Profile Picture">
+                <div class="username">
+                    <strong>Username</strong> <br> u/userID
+                </div>
+            </div>
+            
+            <div class="tabs">
+                <button onclick="changeContent(1)" class="active" id="tab1">Home 1</button>
+                <button onclick="changeContent(2)" id="tab2">Home 2</button>
+                <button onclick="changeContent(3)" id="tab3">Home 3</button>
+                <button onclick="changeContent(4)" id="tab4">Home 4</button>
+            </div>
+            
+            <div class="profile-content" id="content-area">
+                <div class="title">This is a title</div>
+                <p>Lorem ipsum dolor sit amet consectetur. Interdum elementum odio non lectus neque eu. Iaculis tincidunt ut nulla nibh nam id tortor. Sagittis hendrerit eu quis commodo sed rhoncus. Odio quam laoreet gravida lobortis vulputate nunc diam luctus.</p>
+                <div class="actions">
+                    <button>👍 146</button>
+                    <button>💬 Comments</button>
+                    <button>🔗 Share</button>
+                </div>
+            </div>
+            
+            
+        </div>
+
+        <div class="popular">
+            <h3>Popular</h3>
+            <div class="popular-item">
+                <span class="circle red"></span> r/abc
+            </div>
+            <div class="popular-item">
+                <span class="circle blue"></span> r/def
+            </div>
+            <div class="popular-item">
+                <span class="circle green"></span> r/ghi
+            </div>
+            <div class="popular-item">
+                <span class="circle yellow"></span> r/jkl
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    function openLoginModal() {
+        document.getElementById('loginModal').classList.add('active');
+    }
+
+    // Function to switch from login to signup modal
+    function switchToSignup() {
+        document.getElementById('loginModal').classList.remove('active');
+        document.getElementById('signupModal').classList.add('active');
+    }
+    // Function to switch from signup to login modal
+    function switchToLogin() {
+        document.getElementById('signupModal').classList.remove('active');
+        document.getElementById('loginModal').classList.add('active');
+    }
+
+    // Close the modal when clicking outside the modal content
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.addEventListener('click', function(event) {
+            if (event.target === this) {
+                this.classList.remove('active');
+            }
+        });
+    });
+    function changeContent(tab) {
+        const contentArea = document.getElementById("content-area");
+
+        // Remove active class from all buttons
+        document.querySelectorAll('.tabs button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Add active class to clicked tab
+        document.getElementById(`tab${tab}`).classList.add('active');
+
+        // Change content based on tab clicked
+        switch(tab) {
+            case 1:
+                contentArea.innerHTML = `
+                    <div class="title">This is a title</div>
+                    <p>Lorem ipsum dolor sit amet consectetur. Interdum elementum odio non lectus neque eu. Iaculis tincidunt ut nulla nibh nam id tortor. Sagittis hendrerit eu quis commodo sed rhoncus. Odio quam laoreet gravida lobortis vulputate nunc diam luctus.</p>
+                    <div class="actions">
+                <button>👍 146</button>
+                <button>💬 Comments</button>
+                <button>🔗 Share</button>
+            </div>`;
+                break;
+            case 2:
+                contentArea.innerHTML = `
+                    <div class="title">Another title for Home 2</div>
+                    <p>This is content for Home 2. Phasellus pulvinar lorem sed massa malesuada, a viverra lorem lacinia. Integer euismod orci eget metus.</p>
+                    <div class="actions">
+                <button>👍 146</button>
+                <button>💬 Comments</button>
+                <button>🔗 Share</button>
+            </div>`;
+                break;
+            case 3:
+                contentArea.innerHTML = `
+                    <div class="title">Title for Home 3</div>
+                    <p>Content for Home 3 goes here. Aenean accumsan tincidunt metus, vel laoreet ex pellentesque nec. Integer convallis mi orci.</p>
+                    <div class="actions">
+                <button>👍 146</button>
+                <button>💬 Comments</button>
+                <button>🔗 Share</button>
+            </div>`;
+                break;
+            case 4:
+                contentArea.innerHTML = `
+                    <div class="title">Final title for Home 4</div>
+                    <p>Home 4's content. Duis aliquet libero vitae ligula faucibus, in faucibus libero gravida. Donec malesuada venenatis felis in mollis.</p>
+                    <div class="actions">
+                <button>👍 146</button>
+                <button>💬 Comments</button>
+                <button>🔗 Share</button>
+            </div>`;
+                break;
+        }
+    }
+</script>
+</html>
