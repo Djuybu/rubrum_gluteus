@@ -5,13 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useCookies } from "react-cookie";
 import { setThread } from "../redux/reducers/threadId.reducer";
+import { useNavigate } from "react-router-dom";
 export type PostProp = {
   post: Post;
 };
 const PostProp = (postProp: PostProp) => {
   const post = postProp.post;
+  const navigate = useNavigate();
   const navigateToThread = () => {
     dispatch(setThread(post.subredditid));
+    navigate("/thread")
   };
   const [userReaction, setUserReaction] = useState<
     "upvote" | "downvote" | "remove" | undefined

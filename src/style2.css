@@ -1,0 +1,175 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.thread-header {
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+.thread-search-bar {
+    width: 300px;
+    padding: 5px;
+}
+.thread-loginbtn {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    font-size: 25px;
+    margin-right: 100px;
+    padding: 10px 40px 0px 40px;
+    background-color: #E00000;
+    color: white;
+    font-style: bold;
+}
+.thread-container {
+    display: flex;
+    margin-top: 60px; /* To account for fixed header height */
+}
+.thread-sidebar {
+    flex: 15%;
+    min-height: 95vh;
+    height: fit-content;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+.thread-content {
+    flex: 60%;
+    padding: 20px;
+}
+.thread-post {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+.thread-post-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.thread-post-content {
+    font-size: 14px;
+    color: #555;
+}
+.thread-vote-buttons, .thread-comments, .thread-share {
+    display: inline-block;
+    margin-right: 10px;
+}
+.thread-popular {
+    flex: 25%;
+    height: fit-content;
+    margin-top: 20px;
+    padding: 10px;
+    padding-bottom:20px;
+    background-color: #f8f8f8;
+}
+.thread-popular-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.thread-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+/* Modal Overlay */
+.thread-modal-overlay {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.thread-5); /* Darken the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.thread-modal {
+    background-color: white;
+    width: 30vh;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.thread-1);
+}
+
+/* Form elements */
+.thread-modal h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.thread-modal-inputs {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.thread-login-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.thread-login-btn:hover {
+    background-color: #cc0000;
+}
+
+/* Links */
+.thread-forgot-password,
+.thread-sign-up,
+.thread-switch-login {
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+}
+
+.thread-forgot-password a,
+.thread-sign-up a,
+.thread-switch-login a {
+    color: blue;
+    text-decoration: none;
+}
+
+.thread-forgot-password a:hover,
+.thread-sign-up a:hover,
+.thread-switch-login a:hover {
+    text-decoration: underline;
+}
+/* Social login */
+.thread-social-login {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.thread-social-login img {
+    width: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+/* Show the modal when the class 'active' is added */
+.thread-modal-overlay.thread-active {
+    visibility: visible;
+}
+.thread-red { background-color: red; }
+.thread-blue { background-color: blue; }
+.thread-green { background-color: green; }
+.thread-yellow { background-color: yellow; }

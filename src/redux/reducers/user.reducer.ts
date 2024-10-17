@@ -26,5 +26,3 @@ const userReducer = createReducer(initialState, builder => {
         state.user[0] = user;
     })
 })
-
-export default userReducer; 

@@ -9,6 +9,8 @@ import Home from "./Home";
 import Signin from "./Signin";
 import Profile from "./Profile";
 import { useCookies } from "react-cookie";
+import ThreadPage from "./thread";
+import CreateThread from "./CreateThread";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['Authorization'], {
@@ -22,6 +24,8 @@ function App() {
             <Route path="/" element={<Home></Home>}></Route>
             <Route path="/signin" element={<Signin></Signin>}></Route>
             <Route path="/profile" element={<Profile></Profile>}></Route>
+            <Route path="/thread" element={<ThreadPage/>}></Route>
+            <Route path="/thread/create" element={<CreateThread/>}></Route>
           </Routes>
         </Fragment>
       </Router>

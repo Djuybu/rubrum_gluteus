@@ -1,0 +1,85 @@
+.modal-content {
+  width: 60%;
+  display: flex;
+  margin: auto;
+  margin-top: 8rem;
+  background-color: #1a1a1b;
+  color: #e7e7e9;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.left-content {
+  width: 60%;
+}
+
+.right-content {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2.25rem;
+  width: 40%;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 0.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #4c4c4e;
+  border-radius: 5px;
+  background-color: #272729;
+  color: #e7e7e9;
+  margin-bottom: 1rem;
+}
+
+.community-preview {
+  width: 80%;
+  background-color: #272729;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.community-preview h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancel {
+  background-color: #4c4c4e;
+  color: #e7e7e9;
+  margin-right: 10px;
+}
+
+.next {
+  background-color: #007bff;
+  color: #fff;
+}

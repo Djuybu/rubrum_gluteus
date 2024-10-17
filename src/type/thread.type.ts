@@ -1,11 +1,13 @@
 export type Thread = {
-    id: string,
     name: string,
     description: string,
     isPublic: boolean,
     rules: string,
-    avatarPath: string,
-    moderators: [],
-    relatedCommunities: []
-
+    categories: string
 }
+
+// private String name;
+// private String description;
+// private String rules;
+// private String categories;
+// private Boolean isPublic;
