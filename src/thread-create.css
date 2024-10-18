@@ -63,6 +63,7 @@ textarea {
 .modal-buttons {
   display: flex;
   justify-content: flex-end;
+  margin-top: 3rem;
 }
 
 button {
@@ -83,3 +84,58 @@ button {
   background-color: #007bff;
   color: #fff;
 }
+
+.category-list {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.category{
+  display: flexbox;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+  background-color: #e7e7e9;
+  border-radius: 0.6rem;
+  color: #4c4c4e;
+}
+
+.community-settings {
+  /* Basic styling for the container */
+  background-color: #1e1e1e; /* Example dark background */
+  padding: 15px;
+  border-radius: 5px;  
+}
+
+.option {
+  display: flex;
+  align-items: center; /* Vertically align content */
+  margin-bottom: 10px;
+  color: #d2d2d2; /* Example greyish text color */
+}
+
+.option input[type="radio"] {
+  margin-right: 10px;
+  accent-color: #4b91e6; /* Example accent color */
+}
+
+.option label {
+  display: flex;
+  cursor: pointer; /* Make the entire label clickable */
+  width: 100%;
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 1.2em; /* Adjust icon size as needed */
+}
+
+.title {
+  font-weight: 500;
+}
+
+.description {
+  font-size: 0.9em; /* Slightly smaller description text */
+  margin-left: 10px; /* Space between title and description */
+}
+
